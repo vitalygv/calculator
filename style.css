@@ -1,0 +1,37 @@
+html{
+    background-color: black;
+}
+.container{
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    margin: auto;
+    width: 360px;
+    height: 450px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+button{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(48, 45, 45);
+    border: 1px solid black;
+    font-size: 28px;
+    color: white;
+}
+
+#output{
+    margin: auto;
+    width: 340px;
+    height: 100px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: right;
+    padding-top: 1rem;
+    padding-right: 30px;
+    font-size: 40px;
+    background-color: black;
+    color: white;
+}
