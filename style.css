@@ -10,23 +10,35 @@ html{
     width: 360px;
     height: 450px;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 2px solid rgb(27, 26, 26);
 }
-button{
-    width: 80px;
-    height: 80px;
+button.numBtn{
     border-radius: 50%;
+    margin: 5px;
     background-color: rgb(48, 45, 45);
     border: 1px solid black;
     font-size: 28px;
     color: white;
 }
-
+button.operBtn, #equal, #AC, #remove{
+    border-radius: 50%;
+    margin: 5px;
+    background-color: rgb(216, 141, 3);
+    border: 1px solid black;
+    font-size: 28px;
+    color: white;
+}
+#AC, #remove{
+    background-color: rgb(175, 170, 170);
+}
+button:hover{
+    transform: scale(1.05);
+}
 #output{
     margin: auto;
-    width: 340px;
+    width: 324px;
     height: 100px;
-    border: 2px solid black;
+    border: 2px solid  rgb(27, 26, 26);
     border-radius: 5px;
     text-align: right;
     padding-top: 1rem;
@@ -34,4 +46,9 @@ button{
     font-size: 40px;
     background-color: black;
     color: white;
+}
+.solar{
+    margin: 10px 0 10px 0;
+   background-color: rgb(53, 33, 3);
+   border: 1px solid black;
 }
