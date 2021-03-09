@@ -20,7 +20,7 @@ button.numBtn{
     font-size: 28px;
     color: white;
 }
-button.operBtn, #equal, #AC, #remove{
+button.operBtn, #equal, #AC, #remove, #plusMinus{
     border-radius: 50%;
     margin: 5px;
     background-color: rgb(216, 141, 3);
@@ -28,7 +28,7 @@ button.operBtn, #equal, #AC, #remove{
     font-size: 28px;
     color: white;
 }
-#AC, #remove{
+#AC, #remove, #plusMinus{
     background-color: rgb(175, 170, 170);
 }
 button:hover{
