@@ -25,7 +25,7 @@ let numValue2 = "";
 let repeatLastEqualsOperation = false;
 let displayValueForEqualsRepeat = "";
 
-function disableDot() {dotButton.disabled = outputText.textContent.includes(".") };
+function disableDot() { dotButton.disabled = outputText.textContent.includes(".") };
 
 removeButton.addEventListener("click", () => {
     outputText.textContent = outputText.textContent.slice(0, -1);
@@ -33,7 +33,7 @@ removeButton.addEventListener("click", () => {
 });
 
 numButtons.forEach((button) => button.addEventListener("click", (event) => {
-    if (outputText.textContent == "0" || repeatLastEqualsOperation) {outputText.textContent = ""};
+    if (outputText.textContent === "0" || repeatLastEqualsOperation) { outputText.textContent = "" };
     outputText.textContent += event.target.textContent;
     disableDot();
     displayValue = Number(outputText.textContent);
@@ -44,25 +44,28 @@ numButtons.forEach((button) => button.addEventListener("click", (event) => {
 operationButtons.forEach((button) => button.addEventListener("click", (event) => {
     numValue1 = displayValue;
     operationValue = event.target.id;
+    console.log(operationValue);
     outputText.textContent = "";
     repeatLastEqualsOperation = false;
 }));
 
 equalButton.addEventListener("click", () => {
     numValue2 = displayValue;
-    if (numValue2 == "0" && operationValue == "divide") {
+    if (numValue2 === 0 && operationValue === "divide") {
         alert("DIVISION BY ZERO PROHIBITED!");
     } else {
-        repeatLastEqualsOperation ?
-         (outputText.textContent = operate(operationValue, displayValue, displayValueForEqualsRepeat)) : 
-         (outputText.textContent = operate(operationValue, numValue1, numValue2));
+        if (repeatLastEqualsOperation) {
+            outputText.textContent = operate(operationValue, displayValue, displayValueForEqualsRepeat)
+        } else {
+            outputText.textContent = operate(operationValue, numValue1, numValue2)
+        };
     }
     displayValue = Number(outputText.textContent);
     repeatLastEqualsOperation = true;
 });
 
 plusMinusButton.addEventListener("click", () => {
-    if (outputText.textContent.includes("-")){
+    if (outputText.textContent.includes("-")) {
         outputText.textContent = outputText.textContent.slice(1);
     } else {
         outputText.textContent = "-" + outputText.textContent;
@@ -75,5 +78,4 @@ acButton.addEventListener("click", () => {
     numValue2 = "";
     outputText.textContent = "0";
     repeatLastEqualsOperation = false;
-
 })
