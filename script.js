@@ -28,8 +28,7 @@ let displayValueForEqualsRepeat = "";
 
 function inputNumber(event) {
     if (outputText.textContent === "0" || repeatLastEqualsOperation) { outputText.textContent = "" };
-    if (event.key === undefined) { outputText.textContent += event.target.textContent }
-    else { outputText.textContent += event.key }
+    outputText.textContent += event;
     disableDot();
     displayValue = Number(outputText.textContent);
     displayValueForEqualsRepeat = displayValue;
@@ -45,8 +44,8 @@ function removeSymbol() {
 
 function selectOperation(event) {
     numValue1 = displayValue;
-    if (event.key === undefined) { operationValue = event.target.id }
-    else { operationValue = convertOperator(event.key) }
+    console.log(displayValue);
+    operationValue = event;
     outputText.textContent = "";
     repeatLastEqualsOperation = false;
 }
@@ -63,6 +62,7 @@ function evaluate() {
         };
     }
     displayValue = Number(outputText.textContent);
+    console.log(displayValue);
     repeatLastEqualsOperation = true;
 }
 
@@ -82,13 +82,22 @@ function clearAll() {
     repeatLastEqualsOperation = false;
 }
 function inputKeyboard(event) {
-    if (event.key >= 0 && event.key <= 9) inputNumber(event);
-    if (event.key === ".") { if (!outputText.textContent.includes(".")) { outputText.textContent += "." } };
-    if (event.key === "Backspace") removeSymbol();
-    if (event.key === "+" || event.key === "-" || event.key === "/" || event.key === "*") selectOperation(event);
-    if (event.key === "=" || event.key === "Enter") evaluate();
-    if (event.key === "Escape") clearAll();
-    if (event.key === "s") convertPlusMinus();
+    if (event.key >= 0 && event.key <= 9) return inputNumber(event.key);
+    if (event.key === ".") {
+        if (!outputText.textContent.includes(".")) {
+            return outputText.textContent += "."
+        }
+    };
+    if (event.key === "Backspace") return removeSymbol();
+    if (event.key === "+" || event.key === "-" || event.key === "/" || event.key === "*") {
+        return selectOperation(convertOperator(event.key));
+    }
+    if (event.key === "=" || event.key === "Enter") {
+        event.preventDefault();
+        return evaluate();
+    }
+    if (event.key === "Escape") return clearAll();
+    if (event.key === "s") return convertPlusMinus();
 }
 
 function convertOperator(keyboardOperator) {
@@ -96,16 +105,13 @@ function convertOperator(keyboardOperator) {
     if (keyboardOperator === "-") return "subtract";
     if (keyboardOperator === "*") return "multiply";
     if (keyboardOperator === "/") return "divide";
-
 }
 
-numButtons.forEach((button) => button.addEventListener("click", (event) => inputNumber(event)));
-operationButtons.forEach((button) => button.addEventListener("click", (event) => selectOperation(event)));
+numButtons.forEach((button) => button.addEventListener("click", () => inputNumber(button.textContent)));
+operationButtons.forEach((button) => button.addEventListener("click", () => selectOperation(button.id)));
 equalButton.addEventListener("click", evaluate);
 removeButton.addEventListener("click", removeSymbol);
 plusMinusButton.addEventListener("click", convertPlusMinus);
 acButton.addEventListener("click", clearAll)
 
-window.addEventListener("keydown", (event) => {
-    inputKeyboard(event);
-});
+window.addEventListener("keydown", inputKeyboard);
