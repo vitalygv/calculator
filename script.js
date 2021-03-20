@@ -26,9 +26,9 @@ let repeatLastEqualsOperation = false;
 let displayValueForEqualsRepeat = "";
 
 
-function inputNumber(event) {
+function inputNumber(numbers) {
     if (outputText.textContent === "0" || repeatLastEqualsOperation) { outputText.textContent = "" };
-    outputText.textContent += event;
+    outputText.textContent += numbers;
     disableDot();
     displayValue = Number(outputText.textContent);
     displayValueForEqualsRepeat = displayValue;
@@ -83,16 +83,13 @@ function clearAll() {
 }
 function inputKeyboard(event) {
     if (event.key >= 0 && event.key <= 9) return inputNumber(event.key);
-    if (event.key === ".") {
-        if (!outputText.textContent.includes(".")) {
+    if (event.key === "." && !outputText.textContent.includes(".")) {
             return outputText.textContent += "."
-        }
     };
     if (event.key === "Backspace") return removeSymbol();
-    if (event.key === "+" || event.key === "-" || event.key === "/" || event.key === "*") {
+    if (["+", "-","/", "*"].find((operation) => operation === event.key))
         return selectOperation(convertOperator(event.key));
-    }
-    if (event.key === "=" || event.key === "Enter") {
+    if (["=", "Enter"].find((operation) => operation === event.key)) {
         event.preventDefault();
         return evaluate();
     }
